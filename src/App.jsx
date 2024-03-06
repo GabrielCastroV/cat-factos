@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import imgError from './img/error.png'
 
 function App() {
   const CAT_ENDPOINT_RANDOM_FACT = 'https://meowfacts.herokuapp.com/?lang=esp';
@@ -10,13 +11,17 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);                
-   
-      const res = await fetch(CAT_ENDPOINT_RANDOM_FACT);
-      const data = await res.json();
-      setFact(data.data);
+      setLoading(true);          
 
-      setLoading(false);
+      try {
+        const res = await fetch(CAT_ENDPOINT_RANDOM_FACT);
+        const data = await res.json();
+        setFact(data.data);
+      } catch (error) {
+        setFact('')
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
@@ -26,10 +31,14 @@ function App() {
     const getCatImg = async () => {
       setLoading(true);
 
-      const res = await fetch('https://cataas.com/cat');
-      setUrl(res.url);
-
-      setLoading(false);
+      try {
+        const res = await fetch('https://cataas.com/cat');
+        setUrl(res.url);
+      } catch (error) {
+        setUrl(imgError)
+      } finally {
+        setLoading(false);
+      }
     };
 
     getCatImg();
