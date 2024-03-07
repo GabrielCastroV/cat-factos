@@ -16,9 +16,12 @@ function App() {
       try {
         const res = await fetch(CAT_ENDPOINT_RANDOM_FACT);
         const data = await res.json();
+        const res2 = await fetch('https://cataas.com/cat');
+        setUrl(res2.url);
         setFact(data.data);
       } catch (error) {
         setFact('')
+        setUrl(imgError)
       } finally {
         setLoading(false);
       }
@@ -26,23 +29,6 @@ function App() {
 
     fetchData();
   }, [again]);
-
-  useEffect(() => {
-    const getCatImg = async () => {
-      setLoading(true);
-
-      try {
-        const res = await fetch('https://cataas.com/cat');
-        setUrl(res.url);
-      } catch (error) {
-        setUrl(imgError)
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getCatImg();
-  }, [fact]);
 
   return (
     <>
