@@ -39,5 +39,5 @@ If you have any questions or suggestions, feel free to contact me.
 Thank you for your interest in this project!
 
 > [!NOTE]
-> Live demo: https://cat-factos-production.up.railway.app/ 
+> Live demo: https://gabrielcastrov.github.io/cat-factos/
 
